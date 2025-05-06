@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'screens/auth/login_screen.dart';
 import 'screens/auth/signup_screen.dart';
 import 'screens/events/create_event_screen.dart';
+import 'screens/events/event_details_screen.dart';
+import 'screens/events/booking/payment_method_screen.dart';
+import 'screens/events/booking/payment_confirmation_screen.dart';
 import 'screens/home/home_screen.dart';
+import 'models/event.dart';
 import 'services/auth_service.dart';
 import 'theme/app_theme.dart';
 
@@ -172,11 +176,43 @@ class _MainNavigatorState extends State<MainNavigator> {
   }
 
   void _navigateToEventDetails(String eventId) {
-    // For now, just show a snackbar with the event ID
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Event details for ID: $eventId'),
-        duration: const Duration(seconds: 2),
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => EventDetailsScreen(
+          eventId: eventId,
+          onNavigateBack: () => Navigator.pop(context),
+          onBookEvent: (event) => _navigateToPaymentMethod(event),
+        ),
+      ),
+    );
+  }
+
+  void _navigateToPaymentMethod(Event event) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PaymentMethodScreen(
+          event: event,
+          onNavigateBack: () => Navigator.pop(context),
+          onProceedToConfirmation: (event, quantity, paymentMethod) {
+            _navigateToPaymentConfirmation(event, quantity, paymentMethod);
+          },
+        ),
+      ),
+    );
+  }
+
+  void _navigateToPaymentConfirmation(Event event, int quantity, String paymentMethod) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PaymentConfirmationScreen(
+          event: event,
+          quantity: quantity,
+          paymentMethod: paymentMethod,
+          onNavigateBack: () => Navigator.pop(context),
+        ),
       ),
     );
   }

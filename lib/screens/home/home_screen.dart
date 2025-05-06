@@ -132,7 +132,6 @@ class _HomeScreenState extends State<HomeScreen> {
           : _errorMessage != null && _featuredEvents.isEmpty && _nearbyEvents.isEmpty
               ? _buildErrorState()
               : _buildContent(),
-      bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
@@ -373,61 +372,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             );
           },
-        ),
-      ],
-    );
-  }
-
-  Widget _buildBottomNavigationBar() {
-    return BottomNavigationBar(
-      currentIndex: 0, // Home is selected
-      onTap: (index) {
-        switch (index) {
-          case 0: // Home
-            // Already on home screen
-            break;
-          case 1: // Search
-            widget.onNavigateToSearch();
-            break;
-          case 2: // Create
-            widget.onNavigateToCreateEvent();
-            break;
-          case 3: // Events
-            widget.onNavigateToEvents();
-            break;
-          case 4: // Profile
-            widget.onNavigateToProfile();
-            break;
-        }
-      },
-      type: BottomNavigationBarType.fixed,
-      selectedItemColor: AppColors.primaryLight,
-      unselectedItemColor: AppColors.textColor03,
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home_outlined),
-          activeIcon: Icon(Icons.home),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.search_outlined),
-          activeIcon: Icon(Icons.search),
-          label: 'Explore',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.add_circle_outline),
-          activeIcon: Icon(Icons.add_circle),
-          label: 'Create',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.event_outlined),
-          activeIcon: Icon(Icons.event),
-          label: 'Events',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person_outline),
-          activeIcon: Icon(Icons.person),
-          label: 'Profile',
         ),
       ],
     );

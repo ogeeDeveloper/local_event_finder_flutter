@@ -39,6 +39,9 @@ class AppColors {
   static const errorDark = Color(0xFFFFB4AB);
   static const onErrorLight = Color(0xFFFFFFFF);
   static const onErrorDark = Color(0xFF690005);
+  
+  // Success color
+  static const successLight = Color(0xFF4CAF50);
 
   // Gray scale for text
   static const textColor01 = Color(0xFF2E3552);
